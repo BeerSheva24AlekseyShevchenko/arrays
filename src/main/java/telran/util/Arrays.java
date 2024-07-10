@@ -37,10 +37,6 @@ final public class Arrays {
      * @return new array.
      */
     public static int[] insert(int[] arr, int index, int number) {
-        if (index < 0 || index > arr.length) {
-            throw new IllegalArgumentException("incorrect index");
-        }
-
         int[] result = new int[arr.length + 1];
 
         System.arraycopy(arr, 0, result, 0, index);
@@ -58,10 +54,6 @@ final public class Arrays {
      * @return new array.
      */
     public static int[] remove(int[] numbers, int index) {
-        if (index < 0 || index > numbers.length - 1) {
-            throw new IllegalArgumentException("incorrect index");
-        }
-
         int[] result = new int[numbers.length - 1];
 
         System.arraycopy(numbers, 0, result, 0, index);

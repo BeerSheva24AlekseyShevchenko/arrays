@@ -31,8 +31,8 @@ public class ArraysTest {
         assertArrayEquals(new int[] {9, 3, 6}, insert(new int[] {9, 3}, 2, 6));
         assertArrayEquals(new int[] {9}, insert(new int[0], 0, 9));
 
-        assertThrows(IllegalArgumentException.class, () -> insert(new int[1], -1, 1));
-        assertThrows(IllegalArgumentException.class, () -> insert(new int[1], 2, 1));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> insert(new int[1], -1, 1));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> insert(new int[1], 2, 1));
     }
 
     @Test
@@ -42,8 +42,8 @@ public class ArraysTest {
         assertArrayEquals(new int[] {9, 3}, remove(new int[] {9, 3, 6}, 2));
         assertArrayEquals(new int[] {}, remove(new int[] {9}, 0));
 
-        assertThrows(IllegalArgumentException.class, () -> remove(new int[] {9, 3, 6}, -1));
-        assertThrows(IllegalArgumentException.class, () -> remove(new int[] {9, 3, 6}, 3));
-        assertThrows(IllegalArgumentException.class, () -> remove(new int[0], 0));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> remove(new int[] {9, 3, 6}, -1));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> remove(new int[] {9, 3, 6}, 3));
+        assertThrows(NegativeArraySizeException.class, () -> remove(new int[0], 0));
     }
 }
