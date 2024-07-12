@@ -104,7 +104,7 @@ final public class Arrays {
     }
 
     /**
-     * Sort array.
+     * Sort array (asc).
      *
      * @param arr Array.
      * @return Sorted array.
@@ -121,7 +121,25 @@ final public class Arrays {
     }
 
     /**
-     * Binary search element in array.
+     * Check sorted array (asc).
+     *
+     * @param arr Array.
+     * @return True - if sorted array, false - if unsorted array.
+     */
+    public static boolean isSorted(int[] arr) {
+        boolean res = true;
+        for(int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                res = false;
+                break;
+            }
+        }
+
+        return res;
+    }
+
+    /**
+     * Search element in sorted array.
      *
      * @param arr Sorted array.
      * @param key Element.
@@ -168,18 +186,6 @@ final public class Arrays {
         System.arraycopy(arr, pos, result, pos + 1, arr.length - pos);
 
         return result;
-    }
-
-    public static boolean isSorted(int[] arr) {
-        boolean res = true;
-        for(int i = 0; i < arr.length - 1; i++) {
-            if (arr[i] > arr[i + 1]) {
-                res = false;
-                break;
-            }
-        }
-
-        return res;
     }
 
     /**
