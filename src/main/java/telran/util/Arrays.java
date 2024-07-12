@@ -198,9 +198,6 @@ final public class Arrays {
         boolean res = false;
         int m = -1, n = -1;
         int i = 0;
-
-        // {5, 2, 3, 4, 1} // {0, -1} => {0, 4}
-        // {1, 3, 2, 4, 5} // {1, -1} ???
         
         while ((i < arr.length - 1) && (m < 0 || n < 0)) {
             if (arr[i] > arr[i + 1]) {
