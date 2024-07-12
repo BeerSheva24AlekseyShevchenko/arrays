@@ -199,6 +199,7 @@ final public class Arrays {
         int m = -1, n = -1;
         int i = 0;
         
+        // finding the first two unsorted elements
         while ((i < arr.length - 1) && (m < 0 || n < 0)) {
             if (arr[i] > arr[i + 1]) {
                 if (m < 0) {
