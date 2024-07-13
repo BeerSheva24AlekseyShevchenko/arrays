@@ -176,16 +176,11 @@ final public class Arrays {
      * @return New array.
      */
     public static int[] insertSorted(int[] arr, int number) {
-        int[] result = java.util.Arrays.copyOf(arr, arr.length + 1);
         int pos = binarySearch(arr, number);
 
         if (pos < 0) pos = -pos - 1;
 
-        result[pos] = number;
-
-        System.arraycopy(arr, pos, result, pos + 1, arr.length - pos);
-
-        return result;
+        return insert(arr, pos, number);
     }
 
     /**
