@@ -165,7 +165,7 @@ final public class Arrays {
             }
         }
         
-        return res != -1 ? res : -(begin + 1);
+        return res == -1 ? -(begin + 1) : res;
     }
 
     /**
