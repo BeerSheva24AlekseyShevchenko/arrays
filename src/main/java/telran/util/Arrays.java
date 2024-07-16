@@ -128,11 +128,14 @@ final public class Arrays {
      */
     public static boolean isSorted(int[] arr) {
         boolean res = true;
-        for(int i = 0; i < arr.length - 1; i++) {
+        int i = 0;
+
+        while (res && i < arr.length - 1) {
             if (arr[i] > arr[i + 1]) {
                 res = false;
-                break;
             }
+
+            i++;
         }
 
         return res;
@@ -146,26 +149,21 @@ final public class Arrays {
      * @return Index of element in array.
      */
     public static int binarySearch(int[] arr, int key) {
-        int res = -1;
         int begin = 0;
         int end = arr.length - 1;
+        int cur = (begin + end) / 2;
 
-        while (begin <= end) {
-            int cur = (begin + end) / 2;
-
-            if (arr[cur] == key) {
-                res = cur;
-                break;
-            }
-
+        while (begin <= end && arr[cur] != key) {
             if (arr[cur] < key) {
                 begin = cur + 1;
             } else {
                 end = cur - 1;
             }
+
+            cur = (begin + end) / 2;
         }
         
-        return res == -1 ? -(begin + 1) : res;
+        return begin > end ? -(begin + 1) : cur;
     }
 
     /**
