@@ -186,6 +186,28 @@ final public class Arrays {
     }
 
     /**
+     * Check sorted array.
+     *
+     * @param arr Array.
+     * @param cmp Comparator.
+     * @return True - if sorted array, false - if unsorted array.
+     */
+    public static <T> boolean isSorted(T[] arr, Comparator<T> cmp) {
+        boolean res = true;
+        int i = 0;
+
+        while (res && i < arr.length - 1) {
+            if (cmp.compare(arr[i], arr[i + 1]) == 1) {
+                res = false;
+            }
+
+            i++;
+        }
+
+        return res;
+    }
+
+    /**
      * Search element in sorted array.
      *
      * @param arr Sorted array.

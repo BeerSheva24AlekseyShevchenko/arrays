@@ -80,6 +80,25 @@ public class ArraysTest {
     }
 
     @Test
+    void isSortedIntTest() {
+        int[] arr = randomArray.createInt();
+
+        assertFalse(isSorted(arr));
+        assertTrue(isSorted(sort(arr)));
+    }
+
+    @Test
+    void isSortedTypeTest() {
+        isSortedTypeTest0(randomArray.createInteger(), Integer::compare);
+        isSortedTypeTest0(randomArray.createString(), new ComparatorASCII());
+    }
+
+    private <T> void isSortedTypeTest0(T[] arr, Comparator<T> cmp) {
+        assertFalse(isSorted(arr, cmp));
+        assertTrue(isSorted(sort(arr, cmp), cmp));
+    }
+
+    @Test
     void binarySearchIntTest() {
         int[] arr = sort(randomArray.createInt());
 
@@ -132,12 +151,6 @@ public class ArraysTest {
         assertArrayEquals(new int[] {-3, 0, 0, 3}, insertSorted(new int[] {-3, 0, 3}, 0));
         assertArrayEquals(new int[] {-3, -3, 0, 3}, insertSorted(new int[] {-3, 0, 3}, -3));
         assertArrayEquals(new int[] {-9, -3, 0, 3}, insertSorted(new int[] {-3, 0, 3}, -9));
-    }
-
-    @Test
-    void isSortedTest() {
-        assertTrue(isSorted(sort(randomArray.createInt())));
-        assertFalse(isSorted(new int[] {-3, 0, 3, 6, 5}));
     }
 
     @Test
