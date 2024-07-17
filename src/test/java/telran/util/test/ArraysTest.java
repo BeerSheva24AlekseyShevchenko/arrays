@@ -101,42 +101,27 @@ public class ArraysTest {
 
     @Test
     void binarySearchTypeTest() {
-        // Test Integer
-        Comparator<Integer> cmpInteger = Integer::compare;
-        Integer[] arrInteger = sort(randomArray.createInteger(), cmpInteger);
+        binarySearchTypeTest0(randomArray.createInteger(), Integer::compare);
+        binarySearchTypeTest0(randomArray.createString(), new ComparatorASCII());
+    }
 
-        assertEquals(0, binarySearch(arrInteger, arrInteger[0], cmpInteger));
-        assertEquals(arrInteger.length / 4, binarySearch(arrInteger, arrInteger[arrInteger.length / 4], cmpInteger));
-        assertEquals(arrInteger.length / 2, binarySearch(arrInteger, arrInteger[arrInteger.length / 2], cmpInteger));
-        assertEquals(arrInteger.length - 1, binarySearch(arrInteger, arrInteger[arrInteger.length - 1], cmpInteger));
+    private <T> void binarySearchTypeTest0 (T[] arr, Comparator<T> cmp) {
+        sort(arr, cmp);
 
-        Integer[] arrInteger2 = Arrays.copyOfRange(arrInteger, 0, arrInteger.length - 1);
-        assertEquals(-arrInteger.length, binarySearch(arrInteger2, arrInteger[arrInteger.length - 1], cmpInteger));
+        assertEquals(0, binarySearch(arr, arr[0], cmp));
+        assertEquals(arr.length / 4, binarySearch(arr, arr[arr.length / 4], cmp));
+        assertEquals(arr.length / 2, binarySearch(arr, arr[arr.length / 2], cmp));
+        assertEquals(arr.length - 1, binarySearch(arr, arr[arr.length - 1], cmp));
 
-        Integer[] arrInteger3 = Arrays.copyOfRange(arrInteger, 1, arrInteger.length);
-        assertEquals(-1, binarySearch(arrInteger3, arrInteger[0], cmpInteger));
+        T[] arr2 = Arrays.copyOfRange(arr, 0, arr.length - 1);
+        assertEquals(-arr.length, binarySearch(arr2, arr[arr.length - 1], cmp));
 
-        Integer[] arrInteger4 = new Integer[0];
-        assertEquals(-1, binarySearch(arrInteger4, arrInteger[0], cmpInteger));
+        T[] arr3 = Arrays.copyOfRange(arr, 1, arr.length);
+        assertEquals(-1, binarySearch(arr3, arr[0], cmp));
 
-        // Test String
-        Comparator<String> cmpString = new ComparatorASCII();
-        String[] arrString = sort(randomArray.createString(), cmpString);
-
-        assertEquals(0, binarySearch(arrString, arrString[0], cmpString));
-        assertEquals(arrString.length / 4, binarySearch(arrString, arrString[arrString.length / 4], cmpString));
-        assertEquals(arrString.length / 2, binarySearch(arrString, arrString[arrString.length / 2], cmpString));
-        assertEquals(arrString.length - 1, binarySearch(arrString, arrString[arrString.length - 1], cmpString));
-
-        String[] arrString2 = Arrays.copyOfRange(arrString, 0, arrString.length - 1);
-        assertEquals(-arrInteger.length, binarySearch(arrString2, arrString[arrString.length - 1], cmpString));
-
-        String[] arrString3 = Arrays.copyOfRange(arrString, 1, arrString.length);
-        assertEquals(-1, binarySearch(arrString3, arrString[0], cmpString));
-
-        String[] arrString4 = new String[0];
-        assertEquals(-1, binarySearch(arrString4, arrString[0], cmpString));
-
+        @SuppressWarnings("unchecked")
+        T[] arr4 = (T[]) new Object[0];
+        assertEquals(-1, binarySearch(arr4, arr[0], cmp));
     }
 
     @Test
