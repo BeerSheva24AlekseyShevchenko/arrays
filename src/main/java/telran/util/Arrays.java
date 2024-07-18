@@ -127,15 +127,13 @@ final public class Arrays {
      * @param arr Array.
      * @return Sorted array.
      */
-    public static int[] sort(int[] arr) {
+    public static void sort(int[] arr) {
         int length = arr.length;
         boolean isSorted = false;
         while (!isSorted) {
             length--;
             isSorted = pushMaxAtEnd(arr, length);
         }
-
-        return arr;
     }
 
     /**
@@ -145,7 +143,7 @@ final public class Arrays {
      * @param comp Comparator.
      * @return Sorted array.
      */
-    public static <T> T[] sort(T[] array, Comparator<T> comparator) {
+    public static <T> void sort(T[] array, Comparator<T> comparator) {
         int length = array.length;
         boolean flSort = false;
 
@@ -160,8 +158,6 @@ final public class Arrays {
                 }
             }
         } while (!flSort);
-
-        return array;
     }
 
     /**
@@ -171,7 +167,7 @@ final public class Arrays {
      * @param comp Comparator.
      * @return Sorted array.
      */
-    public static Object[] sort(Object[] arr) {
+    public static void sort(Object[] arr) {
         int length = arr.length;
         boolean flSort = false;
 
@@ -191,8 +187,6 @@ final public class Arrays {
                 }
             }
         } while (!flSort);
-
-        return arr;
     }
  
 

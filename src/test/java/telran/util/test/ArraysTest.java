@@ -63,7 +63,8 @@ public class ArraysTest {
 
     @Test
     void sortIntTest() {
-        int[] arr = sort(randomArray.createInt());
+        int[] arr = randomArray.createInt();
+        sort(arr);
 
         for(int i = 0; i < arr.length - 1; i++) {
             assertTrue(arr[i] <= arr[i + 1]);
@@ -75,8 +76,10 @@ public class ArraysTest {
         String [] strings = {"lmn", "cfta", "w", "aa"};
         String [] expectedASCII ={"aa", "cfta", "lmn", "w"};
         String [] expectedLength = {"w", "aa", "lmn", "cfta"};
-        assertArrayEquals(expectedASCII,  sort(strings, new ComparatorASCII()));
-        assertArrayEquals(expectedLength, sort(strings, new ComparatorLength()));
+        sort(strings, new ComparatorASCII());
+        assertArrayEquals(expectedASCII,  strings);
+        sort(strings, new ComparatorLength());
+        assertArrayEquals(expectedLength, strings);
     }
 
     @Test
@@ -84,7 +87,8 @@ public class ArraysTest {
         int[] arr = randomArray.createInt();
 
         assertFalse(isSorted(arr));
-        assertTrue(isSorted(sort(arr)));
+        sort(arr);
+        assertTrue(isSorted(arr));
     }
 
     @Test
@@ -95,12 +99,14 @@ public class ArraysTest {
 
     private <T> void isSortedTypeTest0(T[] arr, Comparator<T> cmp) {
         assertFalse(isSorted(arr, cmp));
-        assertTrue(isSorted(sort(arr, cmp), cmp));
+        sort(arr, cmp);
+        assertTrue(isSorted(arr, cmp));
     }
 
     @Test
     void binarySearchIntTest() {
-        int[] arr = sort(randomArray.createInt());
+        int[] arr = randomArray.createInt();
+        sort(arr);
 
         assertEquals(0, binarySearch(arr, arr[0]));
         assertEquals(arr.length / 4, binarySearch(arr, arr[arr.length / 4]));
@@ -180,7 +186,8 @@ public class ArraysTest {
 
     @Test
     void isOneSwapForSortedTest() {
-        int[] arr = sort(randomArray.createInt());
+        int[] arr = randomArray.createInt();
+        sort(arr);
 
         assertTrue(isOneSwapForSorted(swap(Arrays.copyOf(arr, arr.length), arr.length / 2, arr.length / 2 + 1)));
         assertTrue(isOneSwapForSorted(swap(Arrays.copyOf(arr, arr.length), arr.length / 2, arr.length - 1)));
