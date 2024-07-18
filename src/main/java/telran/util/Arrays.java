@@ -169,6 +169,16 @@ final public class Arrays {
      * Sort array.
      *
      * @param arr Array.
+     * @return Sorted array.
+     */
+    public static <T extends Comparable<T>> void sort(T[] arr) {
+        sort(arr, (o1, o2) -> o1.compareTo(o2));
+    }
+
+    /**
+     * Sort array.
+     *
+     * @param arr Array.
      * @param comp Comparator.
      * @return Sorted array.
      */
@@ -293,16 +303,16 @@ final public class Arrays {
      * Search element in sorted array.
      *
      * @param arr Sorted array.
-     * @param key Element.
+     * @param item Element.
      * @return Index of element in array.
      */
-    public static int binarySearch(int[] arr, int key) {
+    public static int binarySearch(int[] arr, int item) {
         int begin = 0;
         int end = arr.length - 1;
         int mid = (begin + end) / 2;
 
-        while (begin <= end && arr[mid] != key) {
-            if (arr[mid] < key) {
+        while (begin <= end && arr[mid] != item) {
+            if (arr[mid] < item) {
                 begin = mid + 1;
             } else {
                 end = mid - 1;
@@ -318,17 +328,28 @@ final public class Arrays {
      * Search element in sorted array.
      *
      * @param arr Sorted array.
-     * @param key Element.
+     * @param item Element.
+     * @return Index of element in array.
+     */
+    public static <T extends Comparable<T>> int binarySearch(T[] arr, T item) {
+        return binarySearch(arr, item, (o1, o2) -> o1.compareTo(o2));
+    }
+
+    /**
+     * Search element in sorted array.
+     *
+     * @param arr Sorted array.
+     * @param item Element.
      * @param comp Comparator.
      * @return Index of element in array.
      */
-    public static <T> int binarySearch(T[] arr, T key, Comparator<T> comp) {
+    public static <T> int binarySearch(T[] arr, T item, Comparator<T> comp) {
         int begin = 0;
         int end = arr.length - 1;
         int mid = (begin + end) / 2;
 
         while (begin <= end) {
-            int cmp = comp.compare(arr[mid], key);
+            int cmp = comp.compare(arr[mid], item);
 
             if (cmp < 0) {
                 begin = mid + 1;
@@ -348,10 +369,10 @@ final public class Arrays {
      * Search element in sorted array.
      *
      * @param arr Sorted array.
-     * @param key Element.
+     * @param item Element.
      * @return Index of element in array.
      */
-    public static int binarySearch(Object[] arr, Object key) {
+    public static int binarySearch(Object[] arr, Object item) {
         int begin = 0;
         int end = arr.length - 1;
         int mid = (begin + end) / 2;
@@ -360,7 +381,7 @@ final public class Arrays {
             @SuppressWarnings("rawtypes")
             Comparable midVal = (Comparable)arr[mid];
             @SuppressWarnings("unchecked")
-            int cmp = midVal.compareTo(key);
+            int cmp = midVal.compareTo(item);
 
             if (cmp < 0) {
                 begin = mid + 1;

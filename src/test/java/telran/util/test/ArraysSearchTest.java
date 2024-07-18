@@ -46,11 +46,36 @@ public class ArraysSearchTest {
 
     @Test
     void binarySearchTypeTest() {
-        binarySearchTypeTest0(randomArray.createInteger(), Integer::compare);
-        binarySearchTypeTest0(randomArray.createString(), new ComparatorASCII());
+        binarySearchTypeTest0(randomArray.createString());
+        binarySearchTypeTest0(randomArray.createInteger());
+        binarySearchTypeTest0(randomArray.createPersons());
     }
 
-    private <T> void binarySearchTypeTest0 (T[] arr, Comparator<T> cmp) {
+    private <T extends Comparable<T>> void binarySearchTypeTest0 (T[] arr) {
+        sort(arr);
+
+        assertEquals(0, binarySearch(arr, arr[0]));
+        assertEquals(arr.length / 4, binarySearch(arr, arr[arr.length / 4]));
+        assertEquals(arr.length / 2, binarySearch(arr, arr[arr.length / 2]));
+        assertEquals(arr.length - 1, binarySearch(arr, arr[arr.length - 1]));
+
+        T[] arr2 = Arrays.copyOfRange(arr, 0, arr.length - 1);
+        assertEquals(-arr.length, binarySearch(arr2, arr[arr.length - 1]));
+
+        T[] arr3 = Arrays.copyOfRange(arr, 1, arr.length);
+        assertEquals(-1, binarySearch(arr3, arr[0]));
+
+        T[] arr4 = Arrays.copyOf(arr, 0);
+        assertEquals(-1, binarySearch(arr4, arr[0]));
+    }
+
+    @Test
+    void binarySearchTypeCmpTest() {
+        binarySearchTypeCmpTest0(randomArray.createInteger(), Integer::compare);
+        binarySearchTypeCmpTest0(randomArray.createString(), new ComparatorASCII());
+    }
+
+    private <T> void binarySearchTypeCmpTest0 (T[] arr, Comparator<T> cmp) {
         sort(arr, cmp);
 
         assertEquals(0, binarySearch(arr, arr[0], cmp));
@@ -71,11 +96,12 @@ public class ArraysSearchTest {
 
     @Test
     void binarySearchObjectTest() {
-        binarySearchObjectTest0(randomArray.createString());
-        binarySearchObjectTest0(randomArray.createPersons());
+        binarySearchObjectRandomTest0(randomArray.createString());
+        binarySearchObjectRandomTest0(randomArray.createPersons());
+
     }
 
-    private void binarySearchObjectTest0 (Object[] arr) {
+    private void binarySearchObjectRandomTest0 (Object[] arr) {
         sort(arr);
 
         assertEquals(0, binarySearch(arr, arr[0]));

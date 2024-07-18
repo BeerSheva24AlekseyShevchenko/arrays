@@ -25,12 +25,26 @@ public class ArraysSortTest {
 
     @Test
     void sortTypeTest() {
-        sortTypeTest0(randomArray.createInteger(), Integer::compare);
-        sortTypeTest0(randomArray.createString(), new ComparatorASCII());;
-        sortTypeTest0(randomArray.createString(), new ComparatorLength());;
+        sortTypeTest0(randomArray.createInteger());
+        sortTypeTest0(randomArray.createString());;
+        sortTypeTest0(randomArray.createString());;
     }
 
-    private <T> void sortTypeTest0(T[] arr, Comparator<T> cmp) {
+    private <T extends Comparable<T>> void sortTypeTest0(T[] arr) {
+        sort(arr);
+        for (int i = 0; i < arr.length - 1; i++) {
+            assertTrue(arr[i].compareTo(arr[i + 1]) <= 0);
+        }
+    }
+
+    @Test
+    void sortTypeCmpTest() {
+        sortTypeCmpTest0(randomArray.createInteger(), Integer::compare);
+        sortTypeCmpTest0(randomArray.createString(), new ComparatorASCII());;
+        sortTypeCmpTest0(randomArray.createString(), new ComparatorLength());;
+    }
+
+    private <T> void sortTypeCmpTest0(T[] arr, Comparator<T> cmp) {
         sort(arr, cmp);
         for (int i = 0; i < arr.length - 1; i++) {
             assertTrue(cmp.compare(arr[i], arr[i + 1]) <= 0);
