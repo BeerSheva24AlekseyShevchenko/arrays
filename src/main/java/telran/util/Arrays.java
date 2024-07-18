@@ -103,6 +103,17 @@ final public class Arrays {
     }
 
     /**
+     * Remove element from array.
+     *
+     * @param arr Array.
+     * @param predicate Predicate.
+     * @return New array.
+     */
+    public static <T> T[] remove (T[] arr, Predicate<T> predicate){
+        return find(arr, (t) -> !predicate.test(t));
+    }
+
+    /**
      * Swap two elements in array.
      *
      * @param arr Array.

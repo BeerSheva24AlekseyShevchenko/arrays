@@ -2,10 +2,13 @@ package telran.util.test;
 
 import org.junit.jupiter.api.Test;
 
+import telran.util.test.comparators.PredicateOddNumbers;
 import telran.util.test.helpers.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static telran.util.Arrays.*;
+
+import java.util.function.Predicate;
 
 public class ArraysTest {
     private RandomArray randomArray = new RandomArray(1000);
@@ -59,6 +62,18 @@ public class ArraysTest {
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> remove(new int[] {9, 3, 6}, -1));
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> remove(new int[] {9, 3, 6}, 3));
         assertThrows(NegativeArraySizeException.class, () -> remove(new int[0], 0));
+    }
+
+    @Test
+    void removeTypeTest() {
+        removeTypeTest0(randomArray.createInteger(), new PredicateOddNumbers());
+    }
+
+    private <T> void removeTypeTest0(T[] arr, Predicate<T> predicate) {
+        T[] result = remove(arr, predicate);
+        for (int i = 0; i < result.length; i++) {
+            assertFalse(predicate.test(result[i]));
+        }
     }
 
     @Test
