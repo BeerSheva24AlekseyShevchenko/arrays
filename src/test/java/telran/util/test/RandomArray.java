@@ -1,6 +1,9 @@
 package telran.util.test;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class RandomArray {
@@ -59,6 +62,27 @@ public class RandomArray {
             random.nextBytes(chars);
             res[i] = new String(chars, Charset.forName("UTF-8"));
             
+        }
+
+        return res;
+    }
+
+    public Person[] createPersons() {
+        return createPersons(length);
+    }
+
+    public Person[] createPersons(int length) {
+        Person[] res = new Person[length];
+        List<Integer> numbers = new ArrayList<>();
+
+        for (int i = 0; i < length; i++) {
+            numbers.add(i);
+        }
+
+        Collections.shuffle(numbers);
+
+        for (int i = 0; i < length; i++) {
+            res[i] = new Person(numbers.get(i), null);
         }
 
         return res;

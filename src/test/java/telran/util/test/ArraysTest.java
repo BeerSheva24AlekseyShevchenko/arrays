@@ -144,6 +144,31 @@ public class ArraysTest {
     }
 
     @Test
+    void binarySearchObjectTest() {
+        binarySearchObjectTest0(randomArray.createString());
+        binarySearchObjectTest0(randomArray.createPersons());
+
+    }
+
+    private void binarySearchObjectTest0 (Object[] arr) {
+        sort(arr);
+
+        assertEquals(0, binarySearch(arr, arr[0]));
+        assertEquals(arr.length / 4, binarySearch(arr, arr[arr.length / 4]));
+        assertEquals(arr.length / 2, binarySearch(arr, arr[arr.length / 2]));
+        assertEquals(arr.length - 1, binarySearch(arr, arr[arr.length - 1]));
+
+        Object[] arr2 = Arrays.copyOfRange(arr, 0, arr.length - 1);
+        assertEquals(-arr.length, binarySearch(arr2, arr[arr.length - 1]));
+
+        Object[] arr3 = Arrays.copyOfRange(arr, 1, arr.length);
+        assertEquals(-1, binarySearch(arr3, arr[0]));
+
+        Object[] arr4 = new Object[0];
+        assertEquals(-1, binarySearch(arr4, arr[0]));
+    }
+
+    @Test
     void insertSortedIntTest() {
         assertArrayEquals(new int[] {-3, 0, 3, 9}, insertSorted(new int[] {-3, 0, 3}, 9));
         assertArrayEquals(new int[] {-3, 0, 3, 3}, insertSorted(new int[] {-3, 0, 3}, 3));
