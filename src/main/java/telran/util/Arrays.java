@@ -318,7 +318,6 @@ final public class Arrays {
         }
 
         return begin > end ? -(begin + 1) : mid;
-
     }
 
     /**

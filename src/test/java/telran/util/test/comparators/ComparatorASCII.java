@@ -1,4 +1,4 @@
-package telran.util.test;
+package telran.util.test.comparators;
 
 import java.util.Comparator;
 

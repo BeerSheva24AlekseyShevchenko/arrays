@@ -1,4 +1,4 @@
-package telran.util.test;
+package telran.util.test.helpers;
 
 public class Person implements Comparable<Person> {
     private long id;
