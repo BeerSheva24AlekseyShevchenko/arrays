@@ -15,9 +15,18 @@ public class ArraysSortTest {
 
     @Test
     void sortIntTest() {
-        int[] arr = randomArray.createInt();
+        // simple cases
+        int[] arr = new int[] {9, -3, 6, 0, 3};
         sort(arr);
+        int[] expectedArr = new int[] {-3, 0, 3, 6, 9};
+        assertArrayEquals(arr, expectedArr);
 
+        // random cases
+        sortIntTest0(randomArray.createInt());
+    }
+
+    private void sortIntTest0(int[] arr) {
+        sort(arr);
         for(int i = 0; i < arr.length - 1; i++) {
             assertTrue(arr[i] <= arr[i + 1]);
         }
@@ -25,6 +34,13 @@ public class ArraysSortTest {
 
     @Test
     void sortTypeTest() {
+        // simple cases
+        Integer[] arr = new Integer[] {9, -3, 6, 0, 3};
+        sort(arr);
+        Integer[] expectedArr = new Integer[] {-3, 0, 3, 6, 9};
+        assertArrayEquals(arr, expectedArr);
+
+        // random cases
         sortTypeTest0(randomArray.createInteger());
         sortTypeTest0(randomArray.createString());
         sortTypeTest0(randomArray.createString());
@@ -39,11 +55,13 @@ public class ArraysSortTest {
 
     @Test
     void sortTypeCmpTest() {
+        // simple cases
         Integer[] arr = {7, -8, 10, -100, 13, -10, 99};
         Integer[] expectedArr = {-100, -10, -8, 10, 99, 13, 7};
         sort(arr, new ComparatorEvenOdd());
         assertArrayEquals(arr, expectedArr);
 
+        // random cases
         sortTypeCmpTest0(randomArray.createInteger(), Integer::compare);
         sortTypeCmpTest0(randomArray.createInteger(), new ComparatorEvenOdd());
         sortTypeCmpTest0(randomArray.createString(), new ComparatorASCII());
@@ -58,26 +76,18 @@ public class ArraysSortTest {
     }
 
     @Test
-    void sortObjectTest() {
-        sortObjectTest0(randomArray.createInteger());
-        sortObjectTest0(randomArray.createString());
-        sortObjectTest0(randomArray.createInteger());
-    }
-
-    private void sortObjectTest0(Object[] arr) {
-        sort(arr);
-        for (int i = 0; i < arr.length - 1; i++) {
-            @SuppressWarnings("rawtypes")
-            Comparable val = (Comparable)arr[i];
-            @SuppressWarnings("unchecked")
-            int cmp = val.compareTo(arr[i + 1]);
-            assertTrue(cmp <= 0);
-        }
-    }
-
-    @Test
     void isSortedIntTest() {
-        int[] arr = randomArray.createInt();
+        // simple cases
+        int[] arr1 = {-3, 0, 3, 6, 9};
+        int[] arr2 = {6, 0, -3, 9, 3};
+        assertTrue(isSorted(arr1));
+        assertFalse(isSorted(arr2));
+
+        // random cases
+        isSortedIntTest0(randomArray.createInt());
+    }
+
+    private void isSortedIntTest0(int[] arr) {
         assertFalse(isSorted(arr));
         sort(arr);
         assertTrue(isSorted(arr));
@@ -85,6 +95,13 @@ public class ArraysSortTest {
 
     @Test
     void isSortedTypeTest() {
+        // simple cases
+        Integer[] arr1 = new Integer[] {-3, 0, 3, 6, 9};
+        Integer[] arr2 = new Integer[] {6, 0, -3, 9, 3};
+        assertTrue(isSorted(arr1, Integer::compare));
+        assertFalse(isSorted(arr2, Integer::compare));
+
+        // random cases
         isSortedTypeTest0(randomArray.createInteger(), Integer::compare);
         isSortedTypeTest0(randomArray.createInteger(), new ComparatorEvenOdd());
         isSortedTypeTest0(randomArray.createString(), new ComparatorASCII());
@@ -95,17 +112,5 @@ public class ArraysSortTest {
         assertFalse(isSorted(arr, cmp));
         sort(arr, cmp);
         assertTrue(isSorted(arr, cmp));
-    }
-
-    @Test
-    void isSortedObjectTest() {
-        isSortedObjectTest0(randomArray.createInteger());
-        isSortedObjectTest0(randomArray.createString());
-    }
-
-    private void isSortedObjectTest0(Object[] arr) {
-        assertFalse(isSorted(arr));
-        sort(arr);
-        assertTrue(isSorted(arr));
     }
 }

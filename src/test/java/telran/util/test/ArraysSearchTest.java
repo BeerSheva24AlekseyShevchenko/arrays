@@ -15,18 +15,47 @@ public class ArraysSearchTest {
     private RandomArray randomArray = new RandomArray(1000);
 
     @Test
-    void searchTest() {
+    void searchIntTest() {
+        // simple cases
         int[] arr = new int[] {9, 6, 12, 3, 15};
-        
         assertEquals(0, search(arr, arr[0]));
         assertEquals(2, search(arr, arr[2]));
         assertEquals(4, search(arr, arr[4]));
         assertEquals(-1, search(arr, 999));
+
+        // random cases
+        searchIntTest0(randomArray.createInt());
     }
+
+    private void searchIntTest0(int[] arr) {
+        assertEquals(0, search(arr, arr[0]));
+        assertEquals(arr.length / 4, search(arr, arr[arr.length / 4]));
+        assertEquals(arr.length / 2, search(arr, arr[arr.length / 2]));
+        assertEquals(arr.length - 1, search(arr, arr[arr.length - 1]));
+
+        int[] arr3 = Arrays.copyOfRange(arr, 1, arr.length);
+        assertEquals(-1, search(arr3, arr[0]));
+
+        int[] arr4 = new int[0];
+        assertEquals(-1, search(arr4, arr[0]));
+    }
+
 
     @Test
     void binarySearchIntTest() {
-        int[] arr = randomArray.createInt();
+        // simple cases
+        int[] arr = new int[] {-3, 0, 3, 6, 12};
+        assertEquals(0, binarySearch(arr, arr[0]));
+        assertEquals(2, binarySearch(arr, arr[2]));
+        assertEquals(4, binarySearch(arr, arr[4]));
+        assertEquals(-1, binarySearch(arr, -999));
+        assertEquals(-6, binarySearch(arr, 999));
+
+        // random cases
+        binarySearchIntTest0(randomArray.createInt());
+    }
+
+    private void binarySearchIntTest0(int[] arr) {
         sort(arr);
 
         assertEquals(0, binarySearch(arr, arr[0]));
@@ -46,6 +75,15 @@ public class ArraysSearchTest {
 
     @Test
     void binarySearchTypeTest() {
+        // simple cases
+        Integer[] arr = new Integer[] {-3, 0, 3, 6, 12};
+        assertEquals(0, binarySearch(arr, arr[0]));
+        assertEquals(2, binarySearch(arr, arr[2]));
+        assertEquals(4, binarySearch(arr, arr[4]));
+        assertEquals(-1, binarySearch(arr, -999));
+        assertEquals(-6, binarySearch(arr, 999));
+
+        // random cases
         binarySearchTypeTest0(randomArray.createString());
         binarySearchTypeTest0(randomArray.createInteger());
         binarySearchTypeTest0(randomArray.createPersons());
@@ -71,6 +109,15 @@ public class ArraysSearchTest {
 
     @Test
     void binarySearchTypeCmpTest() {
+        // simple cases
+        Integer[] arr = new Integer[] {-3, 0, 3, 6, 12};
+        assertEquals(0, binarySearch(arr, arr[0], Integer::compare));
+        assertEquals(2, binarySearch(arr, arr[2], Integer::compare));
+        assertEquals(4, binarySearch(arr, arr[4], Integer::compare));
+        assertEquals(-1, binarySearch(arr, -999, Integer::compare));
+        assertEquals(-6, binarySearch(arr, 999, Integer::compare));
+        
+        // random cases
         binarySearchTypeCmpTest0(randomArray.createInteger(), Integer::compare);
         binarySearchTypeCmpTest0(randomArray.createString(), new ComparatorASCII());
     }
@@ -92,30 +139,5 @@ public class ArraysSearchTest {
         @SuppressWarnings("unchecked")
         T[] arr4 = (T[]) new Object[0];
         assertEquals(-1, binarySearch(arr4, arr[0], cmp));
-    }
-
-    @Test
-    void binarySearchObjectTest() {
-        binarySearchObjectRandomTest0(randomArray.createString());
-        binarySearchObjectRandomTest0(randomArray.createPersons());
-
-    }
-
-    private void binarySearchObjectRandomTest0 (Object[] arr) {
-        sort(arr);
-
-        assertEquals(0, binarySearch(arr, arr[0]));
-        assertEquals(arr.length / 4, binarySearch(arr, arr[arr.length / 4]));
-        assertEquals(arr.length / 2, binarySearch(arr, arr[arr.length / 2]));
-        assertEquals(arr.length - 1, binarySearch(arr, arr[arr.length - 1]));
-
-        Object[] arr2 = Arrays.copyOfRange(arr, 0, arr.length - 1);
-        assertEquals(-arr.length, binarySearch(arr2, arr[arr.length - 1]));
-
-        Object[] arr3 = Arrays.copyOfRange(arr, 1, arr.length);
-        assertEquals(-1, binarySearch(arr3, arr[0]));
-
-        Object[] arr4 = new Object[0];
-        assertEquals(-1, binarySearch(arr4, arr[0]));
     }
 }

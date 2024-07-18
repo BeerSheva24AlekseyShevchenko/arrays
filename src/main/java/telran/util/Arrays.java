@@ -211,36 +211,6 @@ final public class Arrays {
     }
 
     /**
-     * Sort array.
-     *
-     * @param arr Array.
-     * @param comp Comparator.
-     * @return Sorted array.
-     */
-    public static void sort(Object[] arr) {
-        int length = arr.length;
-        boolean flSort = false;
-
-        do {
-            length--;
-            flSort = true;
-
-            for (int i = 0; i < length; i++) {
-                @SuppressWarnings("rawtypes")
-                Comparable val = (Comparable)arr[i];
-                @SuppressWarnings("unchecked")
-                int cmp = val.compareTo(arr[i + 1]);
-
-                if (cmp > 0) {
-                    swap(arr, i, i + 1);
-                    flSort = false;
-                }
-            }
-        } while (!flSort);
-    }
- 
-
-    /**
      * Check sorted array (asc).
      *
      * @param arr Array.
@@ -274,33 +244,6 @@ final public class Arrays {
 
         while (res && i < arr.length - 1) {
             if (cmp.compare(arr[i], arr[i + 1]) > 0) {
-                res = false;
-            }
-
-            i++;
-        }
-
-        return res;
-    }
-
-    /**
-     * Check sorted array.
-     *
-     * @param arr Array.
-     * @param cmp Comparator.
-     * @return True - if sorted array, false - if unsorted array.
-     */
-    public static boolean isSorted(Object[] arr) {
-        boolean res = true;
-        int i = 0;
-
-        while (res && i < arr.length - 1) {
-            @SuppressWarnings("rawtypes")
-            Comparable val = (Comparable)arr[i];
-            @SuppressWarnings("unchecked")
-            int cmp = val.compareTo(arr[i + 1]);
-
-            if (cmp > 0) {
                 res = false;
             }
 
@@ -361,38 +304,6 @@ final public class Arrays {
 
         while (begin <= end) {
             int cmp = comp.compare(arr[mid], item);
-
-            if (cmp < 0) {
-                begin = mid + 1;
-            } else if (cmp > 0) {
-                end = mid - 1;
-            } else {
-                break;
-            }
-
-            mid = (begin + end) / 2;
-        }
-
-        return begin > end ? -(begin + 1) : mid;
-    }
-
-    /**
-     * Search element in sorted array.
-     *
-     * @param arr Sorted array.
-     * @param item Element.
-     * @return Index of element in array.
-     */
-    public static int binarySearch(Object[] arr, Object item) {
-        int begin = 0;
-        int end = arr.length - 1;
-        int mid = (begin + end) / 2;
-
-        while (begin <= end) {
-            @SuppressWarnings("rawtypes")
-            Comparable midVal = (Comparable)arr[mid];
-            @SuppressWarnings("unchecked")
-            int cmp = midVal.compareTo(item);
 
             if (cmp < 0) {
                 begin = mid + 1;
