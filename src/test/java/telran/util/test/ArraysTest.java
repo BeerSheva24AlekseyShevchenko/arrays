@@ -28,6 +28,18 @@ public class ArraysTest {
     }
 
     @Test
+    void insertTypeTest() {
+        Integer[] arr = randomArray.createInteger();
+        assertEquals(999, insert(arr, 0, 999)[0]);
+        assertEquals(999, insert(arr, arr.length / 2, 999)[arr.length / 2]);
+        assertEquals(999, insert(arr, arr.length, 999)[arr.length]);
+        assertEquals(999, insert(new Integer[0], 0, 999)[0]);
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> insert(new Integer[1], -1, 1));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> insert(new Integer[1], 2, 1));
+    }
+
+    @Test
     void insertSortedIntTest() {
         assertArrayEquals(new int[] {-3, 0, 3, 9}, insertSorted(new int[] {-3, 0, 3}, 9));
         assertArrayEquals(new int[] {-3, 0, 3, 3}, insertSorted(new int[] {-3, 0, 3}, 3));

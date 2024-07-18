@@ -47,14 +47,25 @@ final public class Arrays {
      */
     public static int[] insert(int[] arr, int index, int number) {
         int[] result = new int[arr.length + 1];
-
         System.arraycopy(arr, 0, result, 0, index);
-
         result[index] = number;
-
         System.arraycopy(arr, index, result, index + 1, arr.length - index);
-
         return result;
+    }
+
+     /**
+     * Insert element to array.
+     *
+     * @param arr Array.
+     * @param index Index of inserted element.
+     * @param item Element.
+     * @return New array.
+     */
+    public static <T> T[] insert(T [] arr, int index, T item) {
+        T[] res = java.util.Arrays.copyOf(arr, arr.length + 1);
+        System.arraycopy(arr, index, res, index + 1, arr.length - index);
+        res[index] = item;
+        return res;
     }
 
     /**
