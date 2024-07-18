@@ -126,8 +126,3 @@ Return true if a given array has exactly one swap to get sorted array.
   int result = Arrays.isOneSwapForSorted(arr);
   // result = true;
 ```
-
-## Test report
-
-![Screenshot of a test report](test_report.png)
-
