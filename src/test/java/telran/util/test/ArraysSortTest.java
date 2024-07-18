@@ -25,19 +25,39 @@ public class ArraysSortTest {
 
     @Test
     void sortTypeTest() {
-        String [] strings = {"lmn", "cfta", "w", "aa"};
-        String [] expectedASCII ={"aa", "cfta", "lmn", "w"};
-        String [] expectedLength = {"w", "aa", "lmn", "cfta"};
-        sort(strings, new ComparatorASCII());
-        assertArrayEquals(expectedASCII,  strings);
-        sort(strings, new ComparatorLength());
-        assertArrayEquals(expectedLength, strings);
+        sortTypeTest0(randomArray.createInteger(), Integer::compare);
+        sortTypeTest0(randomArray.createString(), new ComparatorASCII());;
+        sortTypeTest0(randomArray.createString(), new ComparatorLength());;
+    }
+
+    private <T> void sortTypeTest0(T[] arr, Comparator<T> cmp) {
+        sort(arr, cmp);
+        for (int i = 0; i < arr.length - 1; i++) {
+            assertTrue(cmp.compare(arr[i], arr[i + 1]) <= 0);
+        }
+    }
+
+    @Test
+    void sortObjectTest() {
+        sortObjectTest0(randomArray.createInteger());
+        sortObjectTest0(randomArray.createString());
+        sortObjectTest0(randomArray.createInteger());
+    }
+
+    private void sortObjectTest0(Object[] arr) {
+        sort(arr);
+        for (int i = 0; i < arr.length - 1; i++) {
+            @SuppressWarnings("rawtypes")
+            Comparable val = (Comparable)arr[i];
+            @SuppressWarnings("unchecked")
+            int cmp = val.compareTo(arr[i + 1]);
+            assertTrue(cmp <= 0);
+        }
     }
 
     @Test
     void isSortedIntTest() {
         int[] arr = randomArray.createInt();
-
         assertFalse(isSorted(arr));
         sort(arr);
         assertTrue(isSorted(arr));
@@ -47,6 +67,7 @@ public class ArraysSortTest {
     void isSortedTypeTest() {
         isSortedTypeTest0(randomArray.createInteger(), Integer::compare);
         isSortedTypeTest0(randomArray.createString(), new ComparatorASCII());
+        isSortedTypeTest0(randomArray.createString(), new ComparatorLength());
     }
 
     private <T> void isSortedTypeTest0(T[] arr, Comparator<T> cmp) {
