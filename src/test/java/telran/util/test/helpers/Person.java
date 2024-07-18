@@ -19,16 +19,6 @@ public class Person implements Comparable<Person> {
 
     @Override
     public int compareTo(Person o) {
-        int res = 0;
-    
-        if (o.getId() > id) {
-            res = -1;
-        }
-
-        if (o.getId() < id) {
-            res = 1;
-        }
-
-        return res;
+        return Long.compare(id, o.id);
     }
 }
