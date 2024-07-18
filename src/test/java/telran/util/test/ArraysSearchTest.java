@@ -46,11 +46,11 @@ public class ArraysSearchTest {
 
     @Test
     void binarySearchTypeTest() {
-        binarySearchTypeRandomTest0(randomArray.createInteger(), Integer::compare);
-        binarySearchTypeRandomTest0(randomArray.createString(), new ComparatorASCII());
+        binarySearchTypeTest0(randomArray.createInteger(), Integer::compare);
+        binarySearchTypeTest0(randomArray.createString(), new ComparatorASCII());
     }
 
-    private <T> void binarySearchTypeRandomTest0 (T[] arr, Comparator<T> cmp) {
+    private <T> void binarySearchTypeTest0 (T[] arr, Comparator<T> cmp) {
         sort(arr, cmp);
 
         assertEquals(0, binarySearch(arr, arr[0], cmp));
@@ -71,12 +71,11 @@ public class ArraysSearchTest {
 
     @Test
     void binarySearchObjectTest() {
-        binarySearchObjectRandomTest0(randomArray.createString());
-        binarySearchObjectRandomTest0(randomArray.createPersons());
-
+        binarySearchObjectTest0(randomArray.createString());
+        binarySearchObjectTest0(randomArray.createPersons());
     }
 
-    private void binarySearchObjectRandomTest0 (Object[] arr) {
+    private void binarySearchObjectTest0 (Object[] arr) {
         sort(arr);
 
         assertEquals(0, binarySearch(arr, arr[0]));
