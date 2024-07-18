@@ -26,8 +26,8 @@ public class ArraysSortTest {
     @Test
     void sortTypeTest() {
         sortTypeTest0(randomArray.createInteger());
-        sortTypeTest0(randomArray.createString());;
-        sortTypeTest0(randomArray.createString());;
+        sortTypeTest0(randomArray.createString());
+        sortTypeTest0(randomArray.createString());
     }
 
     private <T extends Comparable<T>> void sortTypeTest0(T[] arr) {
@@ -39,9 +39,15 @@ public class ArraysSortTest {
 
     @Test
     void sortTypeCmpTest() {
+        Integer[] arr = {7, -8, 10, -100, 13, -10, 99};
+        Integer[] expectedArr = {-100, -10, -8, 10, 99, 13, 7};
+        sort(arr, new ComparatorEvenOdd());
+        assertArrayEquals(arr, expectedArr);
+
         sortTypeCmpTest0(randomArray.createInteger(), Integer::compare);
-        sortTypeCmpTest0(randomArray.createString(), new ComparatorASCII());;
-        sortTypeCmpTest0(randomArray.createString(), new ComparatorLength());;
+        sortTypeCmpTest0(randomArray.createInteger(), new ComparatorEvenOdd());
+        sortTypeCmpTest0(randomArray.createString(), new ComparatorASCII());
+        sortTypeCmpTest0(randomArray.createString(), new ComparatorLength());
     }
 
     private <T> void sortTypeCmpTest0(T[] arr, Comparator<T> cmp) {
@@ -80,6 +86,7 @@ public class ArraysSortTest {
     @Test
     void isSortedTypeTest() {
         isSortedTypeTest0(randomArray.createInteger(), Integer::compare);
+        isSortedTypeTest0(randomArray.createInteger(), new ComparatorEvenOdd());
         isSortedTypeTest0(randomArray.createString(), new ComparatorASCII());
         isSortedTypeTest0(randomArray.createString(), new ComparatorLength());
     }
