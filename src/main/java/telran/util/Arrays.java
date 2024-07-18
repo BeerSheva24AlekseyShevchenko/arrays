@@ -1,6 +1,7 @@
 package telran.util;
 
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 final public class Arrays {
     private Arrays() {}
@@ -65,6 +66,23 @@ final public class Arrays {
         T[] res = java.util.Arrays.copyOf(arr, arr.length + 1);
         System.arraycopy(arr, index, res, index + 1, arr.length - index);
         res[index] = item;
+        return res;
+    }
+
+    /**
+     * Find elements in array.
+     *
+     * @param arr Array.
+     * @param predicate Predicate.
+     * @return New array with found elements.
+     */
+    public static <T> T[] find(T[]arr, Predicate<T> predicate) {
+        T[] res = java.util.Arrays.copyOf(arr, 0);
+        for(int i = 0; i < arr.length; i++) {
+            if(predicate.test(arr[i])) {
+                res = insert(res, res.length, arr[i]);
+            }
+        }
         return res;
     }
 
