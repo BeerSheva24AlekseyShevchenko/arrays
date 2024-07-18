@@ -75,4 +75,16 @@ public class ArraysSortTest {
         sort(arr, cmp);
         assertTrue(isSorted(arr, cmp));
     }
+
+    @Test
+    void isSortedObjectTest() {
+        isSortedObjectTest0(randomArray.createInteger());
+        isSortedObjectTest0(randomArray.createString());
+    }
+
+    private void isSortedObjectTest0(Object[] arr) {
+        assertFalse(isSorted(arr));
+        sort(arr);
+        assertTrue(isSorted(arr));
+    }
 }

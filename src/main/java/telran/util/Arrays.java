@@ -143,8 +143,8 @@ final public class Arrays {
      * @param comp Comparator.
      * @return Sorted array.
      */
-    public static <T> void sort(T[] array, Comparator<T> comparator) {
-        int length = array.length;
+    public static <T> void sort(T[] arr, Comparator<T> comparator) {
+        int length = arr.length;
         boolean flSort = false;
 
         do {
@@ -152,8 +152,8 @@ final public class Arrays {
             flSort = true;
 
             for (int i = 0; i < length; i++) {
-                if (comparator.compare(array[i], array[i + 1]) > 0) {
-                    swap(array, i, i + 1);
+                if (comparator.compare(arr[i], arr[i + 1]) > 0) {
+                    swap(arr, i, i + 1);
                     flSort = false;
                 }
             }
@@ -223,7 +223,34 @@ final public class Arrays {
         int i = 0;
 
         while (res && i < arr.length - 1) {
-            if (cmp.compare(arr[i], arr[i + 1]) == 1) {
+            if (cmp.compare(arr[i], arr[i + 1]) > 0) {
+                res = false;
+            }
+
+            i++;
+        }
+
+        return res;
+    }
+
+    /**
+     * Check sorted array.
+     *
+     * @param arr Array.
+     * @param cmp Comparator.
+     * @return True - if sorted array, false - if unsorted array.
+     */
+    public static boolean isSorted(Object[] arr) {
+        boolean res = true;
+        int i = 0;
+
+        while (res && i < arr.length - 1) {
+            @SuppressWarnings("rawtypes")
+            Comparable val = (Comparable)arr[i];
+            @SuppressWarnings("unchecked")
+            int cmp = val.compareTo(arr[i + 1]);
+
+            if (cmp > 0) {
                 res = false;
             }
 
