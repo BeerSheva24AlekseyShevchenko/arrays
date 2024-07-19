@@ -110,7 +110,7 @@ final public class Arrays {
      * @return New array.
      */
     public static <T> T[] remove (T[] arr, Predicate<T> predicate){
-        return find(arr, (t) -> !predicate.test(t));
+        return find(arr, predicate.negate());
     }
 
     /**
