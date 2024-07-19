@@ -183,7 +183,7 @@ final public class Arrays {
      * @return Sorted array.
      */
     public static <T extends Comparable<T>> void sort(T[] arr) {
-        sort(arr, (o1, o2) -> o1.compareTo(o2));
+        sort(arr, Comparator.naturalOrder());
     }
 
     /**
@@ -286,7 +286,7 @@ final public class Arrays {
      * @return Index of element in array.
      */
     public static <T extends Comparable<T>> int binarySearch(T[] arr, T item) {
-        return binarySearch(arr, item, (o1, o2) -> o1.compareTo(o2));
+        return binarySearch(arr, item, Comparator.naturalOrder());
     }
 
     /**
