@@ -109,7 +109,7 @@ final public class Arrays {
      * @param predicate Predicate.
      * @return New array.
      */
-    public static <T> T[] remove (T[] arr, Predicate<T> predicate){
+    public static <T> T[] removeIf(T[] arr, Predicate<T> predicate){
         return find(arr, predicate.negate());
     }
 
@@ -285,8 +285,9 @@ final public class Arrays {
      * @param item Element.
      * @return Index of element in array.
      */
-    public static <T extends Comparable<T>> int binarySearch(T[] arr, T item) {
-        return binarySearch(arr, item, Comparator.naturalOrder());
+    @SuppressWarnings("unchecked")
+    public static <T> int binarySearch(T[] arr, T item) {
+        return binarySearch(arr, item, (Comparator<T>) Comparator.naturalOrder());
     }
 
     /**

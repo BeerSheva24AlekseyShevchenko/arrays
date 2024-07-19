@@ -56,8 +56,8 @@ public class ArraysSortTest {
     @Test
     void sortTypeCmpTest() {
         // simple cases
-        Integer[] arr = {7, -8, 10, -100, 13, -10, 99};
-        Integer[] expectedArr = {-100, -10, -8, 10, 99, 13, 7};
+        Integer[] arr = {7, -8, 10, -3, -100, 13, -10, 99};
+        Integer[] expectedArr = {-100, -10, -8, 10, 99, 13, 7, -3};
         sort(arr, new ComparatorEvenOdd());
         assertArrayEquals(arr, expectedArr);
 

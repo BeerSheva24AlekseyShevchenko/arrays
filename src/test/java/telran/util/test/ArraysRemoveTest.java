@@ -27,19 +27,19 @@ public class ArraysRemoveTest {
     }
 
     @Test
-    void removeTypeTest() {
+    void removeTypeIfTest() {
         // simple cases
         Integer[] arr = new Integer[] {-3, 0, 3, 6, 9};
         Integer[] expectedArr = new Integer[] {0, 6};
-        Integer[] resultArray = remove(arr, new PredicateOddNumbers());
+        Integer[] resultArray = removeIf(arr, new PredicateOddNumbers());
         assertArrayEquals(expectedArr, resultArray);
 
         // random cases
-        removeTypeTest0(randomArray.createInteger(), new PredicateOddNumbers());
+        removeIfTypeTest0(randomArray.createInteger(), new PredicateOddNumbers());
     }
 
-    private <T> void removeTypeTest0(T[] arr, Predicate<T> predicate) {
-        T[] result = remove(arr, predicate);
+    private <T> void removeIfTypeTest0(T[] arr, Predicate<T> predicate) {
+        T[] result = removeIf(arr, predicate);
         for (int i = 0; i < result.length; i++) {
             assertFalse(predicate.test(result[i]));
         }
