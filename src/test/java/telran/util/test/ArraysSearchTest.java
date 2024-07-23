@@ -82,6 +82,10 @@ public class ArraysSearchTest {
         assertEquals(4, binarySearch(arr, arr[4]));
         assertEquals(-1, binarySearch(arr, -999));
         assertEquals(-6, binarySearch(arr, 999));
+        assertEquals(-6, binarySearch(arr, 999));
+
+        Object[] arr2 = new Object[] {new Object()}; 
+        assertThrows(ClassCastException.class, () -> binarySearch(arr2, new Object()));
 
         // random cases
         binarySearchTypeTest0(randomArray.createString());
@@ -116,7 +120,7 @@ public class ArraysSearchTest {
         assertEquals(4, binarySearch(arr, arr[4], Integer::compare));
         assertEquals(-1, binarySearch(arr, -999, Integer::compare));
         assertEquals(-6, binarySearch(arr, 999, Integer::compare));
-        
+
         // random cases
         binarySearchTypeCmpTest0(randomArray.createInteger(), Integer::compare);
         binarySearchTypeCmpTest0(randomArray.createString(), new ComparatorASCII());
