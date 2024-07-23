@@ -6,8 +6,6 @@ import static telran.util.Arrays.*;
 import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
-
-import telran.util.test.comparators.*;
 import telran.util.test.helpers.*;
 
 public class ArraysSortTest {
@@ -55,17 +53,37 @@ public class ArraysSortTest {
 
     @Test
     void sortTypeCmpTest() {
-        // simple cases
-        Integer[] arr = {7, -8, 10, -3, -100, 13, -10, 99};
-        Integer[] expectedArr = {-100, -10, -8, 10, 99, 13, 7, -3};
-        sort(arr, new ComparatorEvenOdd());
-        assertArrayEquals(arr, expectedArr);
+        // simple case Integer
+        Integer[] arrInt = {7, -8, 10, -3, -100, 13, -10, 99};
+        Integer[] arrIntExpected = {-100, -10, -8, 10, 99, 13, 7, -3};
+        sort(arrInt, (o1, o2) -> {
+            int res;
+            boolean isEvenO1 = o1 % 2 == 0;
+            boolean isEvenO2 = o2 % 2 == 0;
+    
+            if (isEvenO1 == isEvenO2) {
+                int cmp = Integer.compare(o1, o2);
+                res = isEvenO1 ? cmp : -cmp;
+            } else {
+                res = isEvenO1 ? -1 : 1;
+            }
+    
+            return res;
+        });
+        assertArrayEquals(arrInt, arrIntExpected);
+
+        // simple case String
+        String[] arrStr = new String[] {"lmn", "cftb", "w", "aa"};
+        String[] arrStrExpected1 = new String[] {"aa", "cftb", "lmn", "w"};
+        String[] arrStrExpected2 = new String[] {"w", "aa", "lmn", "cftb"};
+        sort(arrStr, (String a, String b) -> a.compareTo(b));
+        assertArrayEquals(arrStr, arrStrExpected1);
+        sort(arrStr, (String a, String b) -> a.length() - b.length());
+        assertArrayEquals(arrStr, arrStrExpected2);
 
         // random cases
         sortTypeCmpTest0(randomArray.createInteger(), Integer::compare);
-        sortTypeCmpTest0(randomArray.createInteger(), new ComparatorEvenOdd());
-        sortTypeCmpTest0(randomArray.createString(), new ComparatorASCII());
-        sortTypeCmpTest0(randomArray.createString(), new ComparatorLength());
+        sortTypeCmpTest0(randomArray.createString(), (String a, String b) -> a.compareTo(b));
     }
 
     private <T> void sortTypeCmpTest0(T[] arr, Comparator<T> cmp) {
@@ -96,16 +114,14 @@ public class ArraysSortTest {
     @Test
     void isSortedTypeTest() {
         // simple cases
-        Integer[] arr1 = new Integer[] {-3, 0, 3, 6, 9};
-        Integer[] arr2 = new Integer[] {6, 0, -3, 9, 3};
-        assertTrue(isSorted(arr1, Integer::compare));
-        assertFalse(isSorted(arr2, Integer::compare));
+        Integer[] arrInt1 = new Integer[] {-3, 0, 3, 6, 9};
+        Integer[] arrInt2 = new Integer[] {6, 0, -3, 9, 3};
+        assertTrue(isSorted(arrInt1, Integer::compare));
+        assertFalse(isSorted(arrInt2, Integer::compare));
 
         // random cases
         isSortedTypeTest0(randomArray.createInteger(), Integer::compare);
-        isSortedTypeTest0(randomArray.createInteger(), new ComparatorEvenOdd());
-        isSortedTypeTest0(randomArray.createString(), new ComparatorASCII());
-        isSortedTypeTest0(randomArray.createString(), new ComparatorLength());
+        isSortedTypeTest0(randomArray.createString(), (String a, String b) -> a.compareTo(b));
     }
 
     private <T> void isSortedTypeTest0(T[] arr, Comparator<T> cmp) {

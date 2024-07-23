@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import telran.util.test.comparators.*;
 import telran.util.test.helpers.*;
 
 public class ArraysFindTest {
@@ -15,13 +14,15 @@ public class ArraysFindTest {
 
     @Test
     void findTypeTest() {
+        Predicate<Integer> predicateOddNumbers = (a) -> a % 2 != 0;
+
         // simple cases
         Integer[] array = {7, -8, 10, -100, 13, -10, 99};
         Integer[] expected = {7, 13, 99};
-        assertArrayEquals(expected, find(array, new PredicateOddNumbers()));
+        assertArrayEquals(expected, find(array, predicateOddNumbers));
 
         // random cases
-        findTypeTest0(randomArray.createInteger(), new PredicateOddNumbers());
+        findTypeTest0(randomArray.createInteger(), predicateOddNumbers);
     }
 
     private <T> void findTypeTest0(T[]arr, Predicate<T> predicate) {

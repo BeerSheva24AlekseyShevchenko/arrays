@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import telran.util.test.comparators.*;
 import telran.util.test.helpers.*;
 
 public class ArraysRemoveTest {
@@ -28,14 +27,16 @@ public class ArraysRemoveTest {
 
     @Test
     void removeTypeIfTest() {
+        Predicate<Integer> predicateOddNumbers = (a) -> a % 2 != 0;
+
         // simple cases
         Integer[] arr = new Integer[] {-3, 0, 3, 6, 9};
         Integer[] expectedArr = new Integer[] {0, 6};
-        Integer[] resultArray = removeIf(arr, new PredicateOddNumbers());
+        Integer[] resultArray = removeIf(arr, predicateOddNumbers);
         assertArrayEquals(expectedArr, resultArray);
 
         // random cases
-        removeIfTypeTest0(randomArray.createInteger(), new PredicateOddNumbers());
+        removeIfTypeTest0(randomArray.createInteger(), predicateOddNumbers);
     }
 
     private <T> void removeIfTypeTest0(T[] arr, Predicate<T> predicate) {

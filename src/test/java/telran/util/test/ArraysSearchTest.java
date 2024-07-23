@@ -8,7 +8,6 @@ import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
-import telran.util.test.comparators.*;
 import telran.util.test.helpers.*;
 
 public class ArraysSearchTest {
@@ -123,7 +122,7 @@ public class ArraysSearchTest {
 
         // random cases
         binarySearchTypeCmpTest0(randomArray.createInteger(), Integer::compare);
-        binarySearchTypeCmpTest0(randomArray.createString(), new ComparatorASCII());
+        binarySearchTypeCmpTest0(randomArray.createString(), (String a, String b) -> a.compareTo(b));
     }
 
     private <T> void binarySearchTypeCmpTest0 (T[] arr, Comparator<T> cmp) {
