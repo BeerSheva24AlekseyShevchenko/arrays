@@ -43,6 +43,18 @@ Return new array.
   // result = {9, 3, 6}
 ```
 
+**find**
+
+Find element in array.
+Return new array.
+
+```java
+  int[] arr = new arr[] {9, 3, 6);
+
+  int result = Arrays.find(arr, (a) -> a == 3);
+  // result = {3}
+```
+
 **remove**
 
 Remove element from array.
@@ -52,6 +64,18 @@ Return new array.
   int[] arr = new arr[] {9, 3, 6);
 
   int result = Arrays.remove(arr, 1);
+  // result = {9, 6}
+```
+
+**removeIf**
+
+Remove element from array.
+Return new array.
+
+```java
+  int[] arr = new arr[] {9, 3, 6);
+
+  int result = Arrays.remove(arr, a -> a == 3);
   // result = {9, 6}
 ```
 
@@ -69,14 +93,13 @@ Return array.
 
 **sort**
 
-Sort array (asc).
-Return array.
+Sort array.
 
 ```java
   int[] arr = new arr[] {9, 3, 6);
 
-  int result = Arrays.sort(arr);
-  // result = {3 ,6, 9}
+  Arrays.sort(arr);
+  // arr = {3 ,6, 9}
 ```
 
 **isSorted**
@@ -115,9 +138,28 @@ Return new array.
   // result = {3, 4, 6, 9};
 ```
 
+**matchesRules**
+
+Check matches rules in array.
+Return String.
+
+```java
+  CharacterRule[] mustBeRules = new CharacterRule[] {
+      new CharacterRule(true, Character::isUpperCase, "no capital"),
+  };
+  CharacterRule[] mustNotBeRule = new CharacterRule[] {
+      new CharacterRule(true, Character::isLowerCase, "lower case disallowed"),
+  };
+  Character[] arr = new Character[] {'a', 'b', 'c' };
+
+  String result = Arrays.matchesRules(arr, mustBeRules, mustNotBeRule);
+  // result = "no capital, lower case disallowed";
+
+```
+
 **isOneSwapForSorted**
 
-Checks that only one swap is needed for the sorted array
+Checks that only one swap is needed for the sorted array.
 Return true if a given array has exactly one swap to get sorted array.
 
 ```java

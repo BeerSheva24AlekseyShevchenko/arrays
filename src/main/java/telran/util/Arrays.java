@@ -1,7 +1,10 @@
 package telran.util;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 final public class Arrays {
     private Arrays() {}
@@ -368,5 +371,49 @@ final public class Arrays {
         }
 
         return res;
+    }
+
+   /**
+    * Matches rules.
+    *
+    * @param chars - array of char primitives
+    * @param mustBeRules - array of rules that must be true
+    * @param mustNotBeRule array of rules that must be false
+    * @return empty error message if array of chars matches all rules otherwise specific error message saying what rules don't match
+    */
+    public static String matchesRules(char[] chars, CharacterRule[] mustBeRules, CharacterRule[] mustNotBeRule) {
+        List<String> errorMessages = checkRules(chars, mustBeRules);
+        errorMessages.addAll(checkRules(chars, mustNotBeRule));
+
+        return errorMessages.stream().collect(Collectors.joining(", "));
+    }
+
+    private static List<String> checkRules(char[] chars, CharacterRule[] rules) {
+        List<String> errorMessages = new ArrayList<>();
+
+        for (int i = 0; i < rules.length; i++) {
+            String errorMessage = checkRule(chars, rules[i]);
+            if (errorMessage != null) errorMessages.add(errorMessage);
+        }
+
+        return errorMessages;
+    }
+
+    private static String checkRule(char[] chars, CharacterRule rule) {
+        String errorMessage = null;
+        boolean isMissed = true;
+        int j = 0;
+        while (isMissed && j < chars.length) {
+            if (rule.predicate.test(chars[j])) {
+                isMissed = false;
+            }
+            j++;
+        }
+
+        if ((rule.flag && isMissed) || (!rule.flag && !isMissed)) {
+            errorMessage = rule.errorMessage;
+        }
+
+        return errorMessage;
     }
 }
