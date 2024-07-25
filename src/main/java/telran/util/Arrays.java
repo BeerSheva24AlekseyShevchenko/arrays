@@ -391,16 +391,16 @@ final public class Arrays {
     private static List<String> checkRules(char[] chars, CharacterRule[] rules) {
         List<String> errorMessages = new ArrayList<>();
 
-        for (int i = 0; i < rules.length; i++) {
-            String errorMessage = checkRule(chars, rules[i]);
-            if (errorMessage != null) errorMessages.add(errorMessage);
+        for (CharacterRule rule : rules) {
+            if (!checkRule(chars, rule)) {
+                errorMessages.add(rule.errorMessage);
+            }
         }
 
         return errorMessages;
     }
 
-    private static String checkRule(char[] chars, CharacterRule rule) {
-        String errorMessage = null;
+    private static boolean checkRule(char[] chars, CharacterRule rule) {
         boolean isMissed = true;
         int j = 0;
         while (isMissed && j < chars.length) {
@@ -410,10 +410,6 @@ final public class Arrays {
             j++;
         }
 
-        if ((rule.flag && isMissed) || (!rule.flag && !isMissed)) {
-            errorMessage = rule.errorMessage;
-        }
-
-        return errorMessage;
+        return (rule.flag && !isMissed) || (!rule.flag && isMissed);
     }
 }
