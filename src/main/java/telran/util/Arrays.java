@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 final public class Arrays {
     private Arrays() {}
@@ -385,7 +384,7 @@ final public class Arrays {
         List<String> errorMessages = checkRules(chars, mustBeRules);
         errorMessages.addAll(checkRules(chars, mustNotBeRule));
 
-        return errorMessages.stream().collect(Collectors.joining(", "));
+        return String.join(", ", errorMessages);
     }
 
     private static List<String> checkRules(char[] chars, CharacterRule[] rules) {
