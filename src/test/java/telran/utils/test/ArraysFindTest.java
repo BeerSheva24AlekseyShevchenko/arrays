@@ -1,13 +1,13 @@
-package telran.util.test;
+package telran.utils.test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static telran.util.Arrays.*;
+import static telran.utils.Arrays.*;
 
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import telran.util.test.helpers.*;
+import telran.utils.test.helpers.*;
 
 public class ArraysFindTest {
     private RandomArray randomArray = new RandomArray(1000);

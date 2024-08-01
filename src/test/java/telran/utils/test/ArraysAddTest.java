@@ -1,7 +1,7 @@
-package telran.util.test;
+package telran.utils.test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static telran.util.Arrays.*;
+import static telran.utils.Arrays.*;
 
 import org.junit.jupiter.api.Test;
 

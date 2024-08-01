@@ -1,4 +1,4 @@
-package telran.util.test.helpers;
+package telran.utils.test.helpers;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
