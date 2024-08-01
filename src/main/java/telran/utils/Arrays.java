@@ -41,6 +41,21 @@ final public class Arrays {
     }
 
     /**
+     * Add element to array.
+     *
+     * @param arr Array.
+     * @param item Element.
+     * @return New array.
+     */
+    public static <T> T[] add(T[] arr, T item) {
+        T[] result = java.util.Arrays.copyOf(arr, arr.length + 1);
+
+        result[arr.length] = item;
+
+        return result;
+    }
+
+    /**
      * Insert element to array.
      *
      * @param arr Array.
